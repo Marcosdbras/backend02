@@ -39,4 +39,59 @@ public class UsuarioDAO {
 		
 	}
 
+	public void alterar(Usuario usuario) {
+		
+		String sql = "update usuario set login = ?, email = ?, senha = ? where id = ?";
+		
+		try {
+			
+			PreparedStatement preparador =  conn.prepareStatement(sql);
+			
+			preparador.setString(1, usuario.getsLogin() );
+			preparador.setString(2, usuario.getsEmail());
+			preparador.setString(3, usuario.getsSenha());
+			preparador.setInt(4, usuario.getiId());
+			
+			preparador.execute();
+			preparador.close();
+			
+			
+			
+		} catch (SQLException e) {
+			
+			
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public void Excluir(Usuario usuario) {
+		
+		String sql = "delete from usuario where id = ?";
+		
+		try {
+			
+			PreparedStatement preparador =  conn.prepareStatement(sql);
+			
+			
+			preparador.setInt(1, usuario.getiId());
+			
+			preparador.execute();
+			preparador.close();
+			
+			
+			
+		} catch (SQLException e) {
+			
+			
+			
+			e.printStackTrace();
+		}
+		
+
+		
+	}
+
 }
