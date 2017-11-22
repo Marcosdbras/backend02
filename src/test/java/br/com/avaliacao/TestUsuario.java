@@ -7,16 +7,25 @@ public class TestUsuario {
 
 	public static void main(String[] args) {
 		
-		testAlterar();
+		testBuscarPorId();
 
+	}
+
+	private static void testBuscarPorId() {
+		UsuarioDAO usuarioDao = new UsuarioDAO();
+		
+		Usuario usuario = usuarioDao.BuscaUsuarioPorId(4);
+		
+		System.out.println(usuario);
+		
 	}
 
 	public static void testCadastrar() {
 		Usuario usuario = new Usuario();
 
-		usuario.setsEmail("marcosbras@yahoo.com.br");
-		usuario.setsLogin("marcosbras");
-		usuario.setsSenha("123456");
+		usuario.setEmail("marcosbras@yahoo.com.br");
+		usuario.setLogin("marcosbras");
+		usuario.setSenha("123456");
 
 		UsuarioDAO usuarioDao = new UsuarioDAO();
 		usuarioDao.inserir(usuario);
@@ -28,10 +37,10 @@ public class TestUsuario {
 	public static void testAlterar() {
 		Usuario usuario = new Usuario();
 
-		usuario.setiId(4);
-		usuario.setsEmail("marcosbras@yahoo.com.br");
-		usuario.setsLogin("marcosbras");
-		usuario.setsSenha("1234567890123");
+		usuario.setId(4);
+		usuario.setEmail("marcosbras@yahoo.com.br");
+		usuario.setLogin("marcosbras");
+		usuario.setSenha("1234567890123");
 
 		UsuarioDAO usuarioDao = new UsuarioDAO();
 		usuarioDao.alterar(usuario);
@@ -44,16 +53,30 @@ public class TestUsuario {
 	public static void testExcluir() {
 		Usuario usuario = new Usuario();
 
-		usuario.setiId(4);
+		usuario.setId(4);
 
 
 		UsuarioDAO usuarioDao = new UsuarioDAO();
-		usuarioDao.Excluir(usuario);
+		usuarioDao.excluir(usuario);
 
 		System.out.print("Usuário excluido com sucesso");
 
 	}
 	
+	
+	public static void testSalvar(){
+		Usuario usuario = new Usuario();
+		
+		//usuario.setId(4);
+		usuario.setLogin("marcosbras");
+		usuario.setEmail("marcosbras@hotmail.com");
+		usuario.setSenha("123456");
+		
+		UsuarioDAO usuarioDao = new UsuarioDAO();
+		usuarioDao.salvar(usuario);
+		
+		
+	}
 	
 
 }
