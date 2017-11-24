@@ -2,12 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.avaliacao</groupId>
-	<artifactId>avaliacao</artifactId>	
-	<packaging>war</packaging>	
+	<artifactId>avaliacao</artifactId>
+	
 	<version>1.0</version>
 	<name>avaliacao</name>
 	<url>http://maven.apache.org</url>
-	<dependencies>		
+	<dependencies>
+
+		
 
 		<dependency>
 			<groupId>junit</groupId>

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
+
 
 import br.com.avaliacao.conexao.ConexaoDB;
 import br.com.avaliacao.entidades.Usuario;
@@ -162,25 +162,43 @@ public class UsuarioDAO {
 		
 		Usuario usuario = null;
 		
+		List<Usuario> lista = null;
+		
 		String sql = "Select * from usuario";
-		
-		List<Usuario> lista = new ArrayList<Usuario>();
-		
 		
 		try (PreparedStatement preparador = conn.prepareStatement(sql)){
 		
 		ResultSet resultado = preparador.executeQuery();
 		
-		while(resultado.next()){
+		if (resultado.isBeforeFirst()){
+			
+			lista = new ArrayList<Usuario>();
+			
+			while(resultado.next()){
+				
+				usuario = new Usuario();
+				
+				usuario.setId(resultado.getInt("id"));
+				usuario.setCfun(resultado.getInt("cfun"));
+				usuario.setEmail(resultado.getString("email"));
+				usuario.setLogin(resultado.getString("login"));
+				usuario.setSenha(resultado.getString("senha"));
+			
+				lista.add(usuario);
+				
+			}
 			
 			
-		}if (!resultado.next()){
 			
-			lista = null;
+			
 		}
+		
+		
 			
 			
 		}catch(SQLException e){
+			
+			
 			
 			throw new RuntimeException(e);
 			
@@ -189,5 +207,60 @@ public class UsuarioDAO {
 		
 		return lista;
 	} 
+	
+	/**
+	 * Autentica usuário
+	 * @param usuario: Recebe objeto usuário
+	 * @return: Retorna objeto usuário quando encontra informação ou retorna nulo quando não encontra usuário ou quando ocorre algum erro
+	 */
+	public Usuario autenticaUsuario(Usuario usuario){
+		
+
+		
+		String sql = "select * from usuario where (login=? or email=?) and senha = ?";
+		
+		
+		
+		try(PreparedStatement preparador = conn.prepareStatement(sql)){
+ 
+			
+		   preparador.setString(1, usuario.getLogin());	
+           preparador.setString(2, usuario.getEmail());
+           preparador.setString(3, usuario.getSenha());
+			
+           ResultSet resultado = preparador.executeQuery();           
+           
+           
+           if (resultado.next()){
+        	   
+        	   
+               usuario.setLogin(resultado.getString("login"));
+               usuario.setEmail(resultado.getString("email"));
+               usuario.setSenha(resultado.getString("senha"));
+               usuario.setId(resultado.getInt("id"));
+               usuario.setCfun(resultado.getInt("cfun"));
+        	   
+           } else {
+        	   
+        	   
+        	   usuario = null;
+        	   
+           }
+           
+           
+           
+           
+		}catch(SQLException e){
+			
+			usuario = null;
+			
+			throw new RuntimeException(e);
+			
+			
+			
+		}
+		
+		return usuario;
+	}
 	
 }

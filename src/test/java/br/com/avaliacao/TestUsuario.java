@@ -1,5 +1,7 @@
 package br.com.avaliacao;
 
+import java.util.List;
+
 import br.com.avaliacao.entidadades.dao.UsuarioDAO;
 import br.com.avaliacao.entidades.Usuario;
 
@@ -7,8 +9,42 @@ public class TestUsuario {
 
 	public static void main(String[] args) {
 		
-		testBuscarPorId();
+		testAutenticar();
+		
+		
+	}
 
+	private static void testAutenticar() {
+		
+		Usuario usuario = new Usuario();
+		
+		
+		usuario.setLogin("marcosbras");
+		usuario.setSenha("123456");
+		
+		UsuarioDAO usuarioDao = new UsuarioDAO();
+		if (usuarioDao.autenticaUsuario(usuario)!=null){
+			
+			System.out.println(usuario);
+			
+		}else{
+			
+			System.out.println("Usuário não encontrado!");
+			
+		}
+
+		
+	}
+
+	private static void testBuscarTodos() {
+		UsuarioDAO usuarioDao  = new UsuarioDAO();
+		List<Usuario> lista = usuarioDao.BuscaTodosUsuarios();
+		
+		for (Usuario usuario: lista){
+			System.out.println(usuario);
+			
+		}
+		
 	}
 
 	private static void testBuscarPorId() {
@@ -25,7 +61,7 @@ public class TestUsuario {
 
 		usuario.setEmail("marcosbras@yahoo.com.br");
 		usuario.setLogin("marcosbras");
-		usuario.setSenha("123456");
+		usuario.setSenha("12345");
 
 		UsuarioDAO usuarioDao = new UsuarioDAO();
 		usuarioDao.inserir(usuario);
