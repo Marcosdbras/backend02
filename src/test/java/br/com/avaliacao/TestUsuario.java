@@ -1,5 +1,6 @@
 package br.com.avaliacao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.avaliacao.entidadades.dao.UsuarioDAO;
@@ -9,7 +10,11 @@ public class TestUsuario {
 
 	public static void main(String[] args) {
 		
-		testAutenticar();
+		//testAutenticar();
+		
+		
+	
+		
 		
 		
 	}

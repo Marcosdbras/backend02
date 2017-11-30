@@ -12,6 +12,10 @@ public class ConexaoDB {
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
+			// return DriverManager.getConnection("jdbc:mysql://node148542-marcosbras.jelasticlw.com.br/dbteste", "root","UTSETaoiom"); 
+			
+			// return DriverManager.getConnection("jdbc:mysql://localhost:3306/dbteste", "root","UTSETaoiom")
+			
 			return DriverManager.getConnection("jdbc:mysql://localhost:3306/dbteste", "root","UTSETaoiom");
 			
 		} catch (SQLException e) {			

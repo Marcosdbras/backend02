@@ -1,6 +1,8 @@
 package br.com.avalicao.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -98,7 +100,7 @@ public class UsuarioController extends HttpServlet {
 		
 		
 		
-		if(req.getParameter("id")!=null){
+		if(req.getParameter("id")!=null && req.getParameter("acao")=="E"){
 		
 			Usuario usuario = new Usuario();
 			
@@ -114,9 +116,36 @@ public class UsuarioController extends HttpServlet {
 				
 			}else{
 				
-				resp.getWriter().print("Id do usuário não existe na base de dados");
+				resp.getWriter().print("Id do usuário não existe na base de dados ou ação não definida");
 				
 			}
+			
+		} else {
+		    
+			UsuarioDAO usuarioDao = new UsuarioDAO();	
+			
+			
+			List <Usuario> lista = usuarioDao.BuscaTodosUsuarios();
+			
+			
+			 for (Usuario usuario : lista){
+						  
+				
+				resp.getWriter().print(usuario.getId().toString());
+				 
+				 
+			 }
+			
+			 
+			 for (int x = 0; x < lista.size();x++){
+				 
+				 Usuario usuario = (Usuario) lista.get(x);
+				 
+				 resp.getWriter().print(usuario.getId().toString());
+				 
+				 
+				 
+			 }
 			
 		}
 
